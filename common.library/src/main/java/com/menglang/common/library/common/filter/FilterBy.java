@@ -10,9 +10,4 @@ public class FilterBy {
     private String field;
     private String value;
     private FilterType type = FilterType.EQUALS;
-    private FilterValueType valueType = FilterValueType.STRING;
-
-
-//    private FilterMode mode;
-  //  private FilterGroup with; // for nested filter
 }
