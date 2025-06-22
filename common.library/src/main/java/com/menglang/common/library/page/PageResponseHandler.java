@@ -4,6 +4,8 @@ import com.menglang.common.library.page.paginate.PageInfo;
 import com.menglang.common.library.page.paginate.BasePageResponse;
 import com.menglang.common.library.page.paginate.PageBody;
 import com.menglang.common.library.page.paginate.StatusResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,22 @@ import java.util.Collections;
 import java.util.List;
 
 public  class PageResponseHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(PageResponseHandler.class);
+
+    public static ResponseEntity<PageResponse> error(Object error,String message, HttpStatusCode code){
+        StatusResponse statusResponse=StatusResponse.builder()
+                .code((short) code.value())
+                .timeStamp(LocalDateTime.now())
+                .message(message)
+                .error(error)
+                .build();
+        PageResponse response= PageResponse.builder()
+                .success(false)
+                .status(statusResponse)
+                .build();
+        return ResponseEntity.ok(response);
+    }
 
     public static ResponseEntity<PageResponse> failed(String message, HttpStatusCode code) {
 

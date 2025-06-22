@@ -2,5 +2,5 @@ package com.menglang.common.library.page.paginate;
 
 import java.io.Serializable;
 
-public class BasePageResponse implements Serializable {
+public abstract class BasePageResponse implements Serializable {
 }
