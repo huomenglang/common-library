@@ -9,12 +9,13 @@ import java.util.Set;
 public class QueryParamParser {
     private static final Set<String> IGNORE_PARAMS=Set.of("page","size","sort");
 
+     //GET /api/products?name_like=phone&category_eq=electronics&price_gte=100&price_lte=1000
     public static List<FilterBy> parse(Map<String,String> queryParams){
         return queryParams.entrySet().stream().filter(q->!IGNORE_PARAMS.contains(q.getKey()))
                 .map(q->{
                     String[] parts=q.getKey().split("_");
                     String field=parts[0];
-                    String operator=parts.length>1?parts[1].toLowerCase():"EQUAL";
+                    String operator=parts.length>1?parts[1].toUpperCase():"EQ";
                     return new FilterBy(field, q.getValue(),FilterType.valueOf(operator));
                 }).toList();
     }

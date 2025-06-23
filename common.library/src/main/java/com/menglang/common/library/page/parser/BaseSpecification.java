@@ -25,10 +25,11 @@ public class BaseSpecification<T> implements Specification<T> {
             Object value= this.castToFieldType(path.getJavaType(),filter.getValue());
 
             switch (filter.getType()) {
-                case CONTAINS ->
+                case EQ->predicates.add(cb.equal(path, value));
+                case CT ->
                         predicates.add(cb.like(cb.lower(root.get(filter.getField())), "%" + value.toString().toLowerCase() + "%"));
-                case STARTS_WITH ->predicates.add(cb.like(path.as(String.class), value + "%")) ;
-                case ENDS_WITH ->predicates.add(cb.like(path.as(String.class), "%" + value));
+                case SW ->predicates.add(cb.like(path.as(String.class), value + "%")) ;
+                case EW ->predicates.add(cb.like(path.as(String.class), "%" + value));
                 case GT -> predicates.add(cb.gt(root.get(filter.getField()), (Number) value));
                 case GTE ->predicates.add(cb.ge(root.get(filter.getField()), (Number) value));
                 case LT ->predicates.add(cb.lt(root.get(filter.getField()), (Number) value));

@@ -58,9 +58,9 @@ public  class PageResponseHandler {
         if(data instanceof BasePageResponse){
             body.setBody(data);
         } else if (data instanceof List<?>) {
-            if (!((List<?>)data).isEmpty()&&((List<?>) data).getFirst() instanceof BasePageResponse){
+            if (!((List<?>) data).isEmpty() && ((List<?>) data).getFirst() instanceof BasePageResponse) {
                 body.setBody(data);
-            }else{
+            }else {
                 body.setBody(Collections.emptyList());
             }
         }

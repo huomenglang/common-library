@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 public class FilterBy {
     private String field;
     private String value;
-    private FilterType type = FilterType.EQUALS;
+    private FilterType type = FilterType.EQ;
 }
